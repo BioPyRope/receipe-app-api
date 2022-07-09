@@ -24,7 +24,7 @@ class Command(BaseCommand):
             except(psycopg2Error,OperationalError):
                 self.stdout.write("Not ready yet...you need to be patient...")
                 sleep(20)
-            print(isready,"isready")    
+           
         self.stdout.write(self.style.SUCCESS("! DB IS NOW AVAILABLE"))
                 
         
