@@ -1,5 +1,5 @@
-#caculator function
+# caculator function
 
-def add(x,y):
+def add(x, y): 
     '''就是加法'''
     return x + y
