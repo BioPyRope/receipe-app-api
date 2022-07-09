@@ -11,9 +11,9 @@ class CalcTest(SimpleTestCase):
     def test_add_numbers(self):
         '''測試加法功能'''
         var = {
-            "x": 1, 
-            "y": 2, 
+            "x": 1,
+            "y": 2,
         }
         x, y = var.values()
         res = calc.add(x, y)
-        self.assertEqual(res ,3)
+        self.assertEqual(res, 3)
