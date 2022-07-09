@@ -8,23 +8,22 @@ from django.db.utils import OperationalError
 from django.core.management.base import BaseCommand
 from time import sleep
 
+
 class Command(BaseCommand):
-    
-    def handle(self,*arg, **options):
+
+    def handle(self, *arg, **options):
         ''' Entry point for command '''
         self.stdout.write("waiting for database...")
-        db_up=False
-        
+        db_up = False
+
         while db_up is False:
-            
-            try: 
-               isready=self.check(databases=["default"])
-               db_up=True
-               print(isready,"isready")
-            except(psycopg2Error,OperationalError):
+
+            try:
+                isready=self.check(databases = ["default"])
+                db_up=True
+
+            except(psycopg2Error, OperationalError):
                 self.stdout.write("Not ready yet...you need to be patient...")
                 sleep(20)
-           
+
         self.stdout.write(self.style.SUCCESS("! DB IS NOW AVAILABLE"))
-                
-        
