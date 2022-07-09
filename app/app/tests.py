@@ -13,6 +13,6 @@ class CalcTest(SimpleTestCase):
             "x" : 1,
             "y" : 2,
         }
-        x,y= var
+        x,y= var.values()
         res=calc.add(x,y)
         self.assertEqual(res,3)
