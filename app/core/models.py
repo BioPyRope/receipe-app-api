@@ -1,4 +1,7 @@
+
+from django.conf import settings
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -19,6 +22,9 @@ class UserManager(BaseUserManager):
         
         return user
     
+    def create(self):
+        raise ObjectDoesNotExist("the method has been aborted")
+    
     def create_superuser(self,email,password, **otherField):
         if not email or "@" not in email:
             raise ValueError("Email should not empty. Please recheck your request")
@@ -38,6 +44,17 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
     
-    objects=UserManager()
+    objects=UserManager() #critical custom admin的關鍵
     
     USERNAME_FIELD="email"
+
+class Recipes(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, editable = False,on_delete=models.CASCADE)
+    title=models.CharField(max_length=255)
+    time=models.IntegerField()
+    price=models.DecimalField(max_digits=5,decimal_places=2)
+    description=models.TextField(blank=True)
+    link=models.CharField(max_length=255,blank=True)
+    
+    def __str__(self) -> str:
+        return self.title

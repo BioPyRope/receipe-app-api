@@ -3,9 +3,25 @@ Test custom Model
 '''
 
 #SIMPLE? What's different?
+
+from decimal import Decimal
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core.models import Recipes
+from rest_framework.test import APIClient
+from rest_framework import status #class??
 
+
+
+
+def create_user(user_info={
+    "email":"test@example.com",
+    "password":"testpassword1234",
+    "user_name":"testMan1234"
+}):
+    
+    user=get_user_model().objects.create(user_info)
+    return user
 
 class Model_test(TestCase):
     
@@ -46,6 +62,6 @@ class Model_test(TestCase):
         self.assertTrue(admin.is_active)
         self.assertTrue(admin.is_staff)
         self.assertTrue(admin.is_superuser)
-        
-        
-        
+   
+
+     

@@ -40,3 +40,4 @@ class UserAdmin(BaseUserAdmin):
     
     
 admin.site.register(coreM.User,UserAdmin)
+admin.site.register(coreM.Recipes)
